@@ -201,7 +201,7 @@ MLP: actual test counts. Rows are true labels; columns are predictions.
 
 
 <p align="left">
-  <img src="./CNN_base_confusion.png"
+  <img src="./assets_tabfpn/CNN_base_confusion.png"
        alt="CNN base confusion"
        width="800">
 </p>
@@ -217,7 +217,7 @@ Diagonal cells count correct predictions; off-diagonal cells identify confusions
 ![image](figures_en/CNN_profunda_confusion.png)
 
 <p align="left">
-  <img src="./CNN_profunda_confusion.png"
+  <img src="./assets_tabfpn/CNN_profunda_confusion.png"
        alt="CNN profunda confusion"
        width="800">
 </p>
@@ -231,7 +231,7 @@ Deep CNN: two convolutions per block before pooling.
 ![image](figures_en/CNN_BatchNorm_confusion.png)
 
 <p align="left">
-  <img src="./CNN_BatchNorm_confusion.png"
+  <img src="./assets_tabfpn/CNN_BatchNorm_confusion.png"
        alt="CNN BatchNorm confusion"
        width="800">
 </p>
@@ -251,7 +251,7 @@ All five confusion matrices use real predictions on the same test partition. Tab
 
 
 <p align="left">
-  <img src="./figures_en/learning.png"
+  <img src="./assets_tabfpn/learning.png"
        alt="figures_en/learning"
        width="800">
 </p>
@@ -286,9 +286,11 @@ One seed, one subsample and one timing measurement do not support extrapolation 
 
 ![image](figures_en/comparacion_tiempos.png)
 
+https://github.com/alamg001/TabFPN_alamg/blob/main/assets_tabfpn/comparacion_tiempos.png
+
 
 <p align="left">
-  <img src="./figures_en/comparacion_tiempos.png"
+  <img src="./assets_tabfpn/comparacion_tiempos.png"
        alt="figures_en/comparacion tiempos"
        width="800">
 </p>
@@ -319,7 +321,7 @@ TabPFN inference took 2.032 s, compared with 0.269 s for Deep CNN, approximately
 ![image](figures_en/dashboard.png)
 
 <p align="left">
-  <img src="./figures_en/dashboard.png"
+  <img src="./assets_tabfpn/dashboard.png"
        alt="figures_en/dashboard"
        width="800">
 </p>
