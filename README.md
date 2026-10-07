@@ -136,7 +136,7 @@ The intervals are 95% percentile estimates from 200 stratified bootstrap replica
 
 ## 4. ROC curves and class discrimination
 
-![image](figures_en/roc_macro.png)
+# ![image](figures_en/roc_macro.png)
 
 
 
@@ -149,7 +149,7 @@ The intervals are 95% percentile estimates from 200 stratified bootstrap replica
 
 Macro ROC curves for the common test set. Legend AUC values use actual predicted probabilities. The PCA32 + TabPFN-3.5 curve is included.
 
-![image](figures_en/roc_classes.png)
+# ![image](figures_en/roc_classes.png)
 
 <p align="left">
   <img src="./assets_tabfpn/roc_classes.png"
@@ -228,7 +228,7 @@ Diagonal cells count correct predictions; off-diagonal cells identify confusions
 
 Deep CNN: two convolutions per block before pooling.
 
-![image](figures_en/CNN_BatchNorm_confusion.png)
+# ![image](figures_en/CNN_BatchNorm_confusion.png)
 
 <p align="left">
   <img src="./assets_tabfpn/CNN_BatchNorm_confusion.png"
@@ -247,7 +247,7 @@ All five confusion matrices use real predictions on the same test partition. Tab
 
 ## 8. Learning dynamics and local efficiency
 
-![image](figures_en/learning.png)
+# ![image](figures_en/learning.png)
 
 
 <p align="left">
@@ -284,9 +284,9 @@ One seed, one subsample and one timing measurement do not support extrapolation 
 
 **Favorable result for Prior Labs TabPFN-3.5.** In the CPU pilot, PCA32 + TabPFN required **54.7% less fitting time** and **39.6% less total time** than Deep CNN, for one fit and one evaluation on the same 1,000 test images.
 
-![image](figures_en/comparacion_tiempos.png)
+# ![image](figures_en/comparacion_tiempos.png)
 
-https://github.com/alamg001/TabFPN_alamg/blob/main/assets_tabfpn/comparacion_tiempos.png
+# https://github.com/alamg001/TabFPN_alamg/blob/main/assets_tabfpn/comparacion_tiempos.png
 
 
 <p align="left">
@@ -318,7 +318,7 @@ TabPFN inference took 2.032 s, compared with 0.269 s for Deep CNN, approximately
 
 ## 10. Dashboard and evaluation controls
 
-![image](figures_en/dashboard.png)
+# ![image](figures_en/dashboard.png)
 
 <p align="left">
   <img src="./assets_tabfpn/dashboard.png"
