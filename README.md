@@ -14,6 +14,13 @@ October 5, 2026
 
 ![image](figures_en/samples.png)
 
+
+<p align="left">
+  <img src="./assets_pm10_italia/PM10_Italia_v1.png"
+       alt="Infografía introductoria sobre PM10 en Italia"
+       width="800">
+</p>
+
 Actual examples from all ten categories. Training, validation and test observations remain separate.
 
 Source notebook: `Lab_1_CNN.ipynb`. Deliverables: executed notebook outputs, self-contained dashboard, evaluation data and reproducible LaTeX sources. English edition of the updated Spanish report.
