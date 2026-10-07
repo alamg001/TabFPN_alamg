@@ -12,14 +12,14 @@ October 5, 2026
 
 **Experimental status: executed.** MLP, three CNNs and Prior Labs TabPFN-3.5 with PCA32 were evaluated on the same 1,000 test images. TabPFN achieved 84.3% accuracy, the highest macro AUC (0.9858) and the lowest log-loss (0.4272); Deep CNN achieved the highest accuracy (84.8%).
 
-![image](figures_en/samples.png)
 
 
 <p align="left">
-  <img src="./assets_pm10_italia/PM10_Italia_v1.png"
-       alt="Infografía introductoria sobre PM10 en Italia"
+  <img src="./assets_tabfpn/samples.png"
+       alt="samples pictures"
        width="800">
 </p>
+
 
 Actual examples from all ten categories. Training, validation and test observations remain separate.
 
@@ -35,10 +35,12 @@ The TabPFN-3.5 technical report \[1\] describes a shared classification and regr
 
 Each observation $x_i\in[0,1]^{28\times28}$ is flattened into 784 columns. The main representation applies principal component analysis (PCA) to retain 32 components:
 
+
 $$
-z_i=(\operatorname{vec}(x_i)-\widehat\mu_{\rm train})\widehat V_{32},\qquad
- \widehat V_{32}^{\mathsf T}\widehat V_{32}=I_{32}.
+z_i = (\mathrm{vec}(x_i) - \hat{\mu}_{\text{train}}) \hat{V}_{32}, \qquad \hat{V}_{32}^{\top} \hat{V}_{32} = I_{32}.
 $$
+
+
 
 The mean and projection are fitted exclusively on training data. The reduction can decrease cost and redundancy, but may remove discriminative information. The evaluated object is therefore the complete PCA + TabPFN-3.5 pipeline.
 
@@ -48,10 +50,12 @@ The technical report uses frozen image embeddings followed by PCA in MulTaBench.
 
 Conceptually, its context-conditioned predictive distribution approximates an amortized inference procedure:
 
+
 $$
-p_\theta(y_*\mid x_*,D_{\rm train})\approx
- \int p(y_*\mid x_*,\phi)\,p(\phi\mid D_{\rm train})\,d\phi.
+p_\theta(y \mid x, D_{\mathrm{train}}) \approx \int p(y \mid x, \phi) p(\phi \mid D_{\mathrm{train}}) \mathrm{d}\phi
 $$
+
+
 
 This expression describes the motivation, not a certified exact posterior for Fashion-MNIST. Local fitting does not make foundation-model pretraining free. The report gives approximately 220 million parameters for TabPFN-3.5; the official checkpoint was successfully loaded. Its pretrained parameter count is distinct from the parameters optimized locally in this experiment.
 
@@ -101,11 +105,12 @@ The source records CNN test accuracy of 0.9161, CNN validation accuracy of 0.924
 
 Accuracy and F1 use $\widehat y_i=\arg\max_k p_{ik}$. The area under the receiver operating characteristic curve (ROC AUC) is computed from probabilities, one class versus the rest (OvR), then averaged with equal class weights. Log-loss evaluates the probability assigned to the correct label; lower values are better.
 
+
 $$
-\operatorname{Acc}=\frac1n\sum_i\mathbf1(\widehat y_i=y_i),\qquad
-\operatorname{LL}=-\frac1n\sum_i\log p_{i,y_i},\qquad
-\operatorname{AUC}_{\rm macro}=\frac1{10}\sum_{k=0}^9\operatorname{AUC}_{k,\rm OvR}.
+\mathrm{Acc} = \frac{1}{n} \sum_i \mathbf{1}(\hat{y}_i = y_i), \qquad \mathrm{LL} = -\frac{1}{n} \sum_i \log p_{i,y_i}, \qquad \mathrm{AUC}_{\mathrm{macro}} = \frac{1}{10} \sum_{k=0}^9 \mathrm{AUC}_{k, \mathrm{OvR}}.
 $$
+
+
 
 | Model            | Fit (s) | Test (s) | ms/image | Local weights |
 |:-----------------|--------:|---------:|---------:|--------------:|
