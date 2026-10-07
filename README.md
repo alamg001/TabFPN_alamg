@@ -389,30 +389,34 @@ These operations do not guarantee visually plausible synthetic images, privacy p
 
 5.  Haan, S. *TabPFGen*. Supplied tutorials, tests and distribution configuration 0.1.4. <https://github.com/sebhaan/TabPFGen>. Methodological background rather than the TabPFN-3.5 API.
 
-### 12.1 Reading inventory
+### 12.1 Reading Github TabFPN:
 
-All 18 supplied reference files below were reviewed. Suffixed copies were retained as separate sources; their main explanations are equivalent.
+## Technical table of the 19 files from the TabFPN GitHub repository.
 
-| Exact filename                                                 | Content               |
-|:---------------------------------------------------------------|:----------------------|
-| `arXiv-2609.17895v2.tar.gz`                                    | 3.5 report            |
-| `01_tabpfgen_class_.md`                                        | Generator interface   |
-| `02_tabpfn_integration_.md`                                    | Predictor integration |
-| `03_classification_generation___generate_classification___.md` | Class generation      |
-| `04_regression_generation___generate_regression___.md`         | Regression/quantiles  |
-| `05_sgld_sampling____sgld_step___.md`                          | SGLD sampling         |
-| `06_energy_function____compute_energy___.md`                   | Energy/distances      |
-| `07_visualization___visuals_py___.md`                          | Diagnostics           |
-| `test_tabpfgen.py`                                             | Software tests        |
-| `01_tabpfgen_class_ (1).md`                                    | Chapter copy 1        |
-| `02_tabpfn_integration_ (1).md`                                | Chapter copy 2        |
-| `06_energy_function____compute_energy___ (1).md`               | Chapter copy 6        |
-| `05_sgld_sampling____sgld_step___ (1).md`                      | Chapter copy 5        |
-| `04_regression_generation___generate_regression___ (1).md`     | Chapter copy 4        |
-| `06_energy_function____compute_energy___ (2).md`               | Chapter copy 6        |
-| `07_visualization___visuals_py___ (1).md`                      | Chapter copy 7        |
-| `setup.py`                                                     | Distribution 0.1.4    |
-| `requirements.txt`                                             | Dependencies          |
+Each file is included under its exact name in GitHub repository. Dataset refers to data used or described, not an attached data file. Parameters are those in the received material. Formulas F1–F9 are explained below: several are mathematical renderings of code or prose, rather than equations printed in the original files. The TabPFN-3.5 model in the report is not attributed to the older tutorials.
 
-**Conclusion.** This pilot includes real Prior Labs TabPFN-3.5 results. Deep CNN maximizes accuracy; TabPFN maximizes AUC and minimizes log-loss; MLP minimizes total time. TabPFN also reduces fitting time by 54.7% and total time by 39.6% relative to Deep CNN for the evaluated local budget. The accuracy advantage of TabPFN over Baseline CNN is inconclusive. Model selection must specify its quality metric and operating budget and be validated across seeds and sample sizes.
+
+| File | Objective | Description / classification | Dataset | Model | Parameters | Libraries | Mathematical formula |
+|---|---|---|---|---|---|---|---|
+| 01_tabpfgen_class_.md | Configure the generator | Tutorial on the constructor, scaler, and device | Generic X, y table; no specific dataset | TabPFGen | 1000 steps; step size 0.01; noise scale 0.01; device=auto | tabpfgen, torch, scikit-learn | F1: standardization; no constructor-specific equation |
+| 02_tabpfn_integration_.md | Assign targets to synthetic features | Tutorial on integration with a pretrained predictor | Conceptual example: age, blood pressure, and condition; 100 dummy vectors in the code | TabPFNClassifier / TabPFNRegressor | device; fit; predict_proba; predict; illustrative heuristic: fewer than 20 unique values | tabpfn, torch, numpy | F2: classification using argmax; regression using predict |
+| 03_classification_generation___generate_classification___.md | Generate labeled observations | generate_classification tutorial: scaling, initialization, SGLD, and labeling | Dummy emails: 50 × 10; class counts 45/5; requested output 100 × 10 | TabPFGen + TabPFNClassifier | n_samples=100; balance_classes=True; SGLD configuration | numpy, torch, tabpfn, scikit-learn, tabpfgen | F1, F2, F3; initial allocation per class ≈ floor(m/K) |
+| 04_regression_generation___generate_regression___.md | Generate observations with continuous targets | generate_regression tutorial and quantile selection | Dummy housing data: 60 × 2; requested output 120 × 2 | TabPFGen + TabPFNRegressor | n_samples=120; use_quantiles=True; 10 strata in the example; stabilizer 1e-8 | numpy, torch, tabpfn, scikit-learn, tabpfgen | F3, F4; simulation y=50000+100X1+10000X2+10000ξ |
+| 05_sgld_sampling____sgld_step___.md | Refine synthetic features | Tutorial on the SGLD update and automatic differentiation | Synthetic and training tensors; no named dataset | SGLD sampler with distance-based energy | η=sgld_step_size; s=sgld_noise_scale; T=n_sgld_steps | torch (autograd), numpy | F3: X(t+1)=X(t)−η∇E_total+s√(2η)Ξ(t) |
+| 06_energy_function____compute_energy___.md | Define the function guiding refinement | Tutorial: nearest neighbor and average within-class distance | Example shapes: synthetic 100 × 15; real 500 × 15 | Distance-based energy | torch.cdist with the default Euclidean norm; ε=1e-6 | torch | F5: E_i=min_j d_ij + Σ_j M_ij d_ij/(Σ_j M_ij+1e-6) |
+| 07_visualization___visuals_py___.md | Compare original and synthetic data | Tutorial on distributions, t-SNE, correlations, importance, and quantiles | Dummy emails: 50 × 10 versus 100 × 10; housing: 60 × 2 versus 120 × 2 | t-SNE; auxiliary RandomForestClassifier / RandomForestRegressor | feature_names; t-SNE n_components=2, random_state=42; five important features | numpy, matplotlib, scikit-learn, scipy; collections | F6: Pearson correlation (mathematical rendering of corrcoef); Q-Q against normality |
+| README (1).md | Present usage, installation, and scope | General documentation for an independent implementation | load_breast_cancer; load_diabetes; make_classification(1000, 3 classes, weights 0.7/0.2/0.1) | TabPFGen with TabPFN | Examples: 500 steps and 100 synthetic observations; target_per_class=None or 1000; min_class_size=5 | tabpfgen, scikit-learn; dependencies in requirements.txt | F3; F7: intended per-class shortfall, expressed from the balancing objective |
+| setup.py | Package and declare the project | Installation code; author Sebastian Haan | Not applicable | TabPFGen package 0.1.4 | Python ≥3.10; package_dir=src; find_packages; install_requires | setuptools, pathlib; reads requirements.txt | Not applicable |
+| requirements.txt | Declare dependencies | Version configuration; not an implementation | Not applicable | TabPFGen / TabPFN dependencies | Versions detailed in the catalog | numpy≥1.26.0; torch≥2.5.0; scikit-learn==1.5.2; matplotlib≥3.10.0; scipy≥1.15.0; tabpfn≥2.0.1; pandas≥2.2.0; seaborn≥0.12.0 | Not applicable |
+| test_tabpfgen.py | Check expected behavior | Code with 15 test_* methods; not executed | make_classification: 100 × 5, 3 classes; make_regression: 100 × 5; balancing base: 200 × 4, 4 classes; other edge cases | TabPFGen under test | 10 steps; step size/noise scale=0.01; CPU; seed=42; 51 requested classification samples and 50 regression samples | unittest, numpy, torch, scikit-learn, warnings, tabpfgen | F8: CV=std(counts)/mean(counts); expected classification sample count K floor(m/K) |
+| arXiv-2609.17895v2.tar.gz | Document the design and evaluate TabPFN-3.5 | Technical report: 46 internal files, source files, figures, and bibliography | Synthetic prior; TabArena, BeyondArena, STRABLE, MulTaBench, RelArena, TALENT, ScoringBench, fev-bench | TabPFN-3.5; Fast; Plus; Thinking | Base 220M; Fast 84M; width 1024; 16 heads; 8 base estimators and 4 Fast estimators; recommended limits 1M rows/6000 columns; E=128,G=3,F=32,K=4 | No executable requirements file; mentions the TabPFN ecosystem, e5-small-v2, DINOv3-small, PCA, and wrappers; pdflatex/TeX Live 2025 compilation | F9: Fourier encoding and ECDF rank, expressed from the text; no complete training formula or prior-generation code |
+| 01_tabpfgen_class_ (1).md | Configure the generator | Identical copy of 01_tabpfgen_class_.md | Generic X, y table; no specific dataset | TabPFGen | 1000 steps; step size 0.01; noise scale 0.01; device=auto | tabpfgen, torch, scikit-learn | F1: standardization; no constructor-specific equation |
+| 02_tabpfn_integration_ (1).md | Assign targets to synthetic features | Identical copy of 02_tabpfn_integration_.md | Conceptual example: age, blood pressure, and condition; 100 dummy vectors in the code | TabPFNClassifier / TabPFNRegressor | device; fit; predict_proba; predict; illustrative heuristic: fewer than 20 unique values | tabpfn, torch, numpy | F2: classification using argmax; regression using predict |
+| 04_regression_generation___generate_regression___ (1).md | Generate observations with continuous targets | Identical copy of 04_regression_generation___generate_regression___.md | Dummy housing data: 60 × 2; requested output 120 × 2 | TabPFGen + TabPFNRegressor | n_samples=120; use_quantiles=True; 10 strata in the example; stabilizer 1e-8 | numpy, torch, tabpfn, scikit-learn, tabpfgen | F3, F4; simulation y=50000+100X1+10000X2+10000ξ |
+| 05_sgld_sampling____sgld_step___ (1).md | Refine synthetic features | Identical copy of 05_sgld_sampling____sgld_step___.md | Synthetic and training tensors; no named dataset | SGLD sampler with distance-based energy | η=sgld_step_size; s=sgld_noise_scale; T=n_sgld_steps | torch (autograd), numpy | F3: X(t+1)=X(t)−η∇E_total+s√(2η)Ξ(t) |
+| 06_energy_function____compute_energy___ (1).md | Define the function guiding refinement | Identical copy of 06_energy_function____compute_energy___.md | Example shapes: synthetic 100 × 15; real 500 × 15 | Distance-based energy | torch.cdist with the default Euclidean norm; ε=1e-6 | torch | F5: E_i=min_j d_ij + Σ_j M_ij d_ij/(Σ_j M_ij+1e-6) |
+| 06_energy_function____compute_energy___ (2).md | Define the function guiding refinement | Identical copy of 06_energy_function____compute_energy___.md | Example shapes: synthetic 100 × 15; real 500 × 15 | Distance-based energy | torch.cdist with the default Euclidean norm; ε=1e-6 | torch | F5: E_i=min_j d_ij + Σ_j M_ij d_ij/(Σ_j M_ij+1e-6) |
+| 07_visualization___visuals_py___ (1).md | Compare original and synthetic data | Identical copy of 07_visualization___visuals_py___.md | Dummy emails: 50 × 10 versus 100 × 10; housing: 60 × 2 versus 120 × 2 | t-SNE; auxiliary RandomForestClassifier / RandomForestRegressor | feature_names; t-SNE n_components=2, random_state=42; five important features | numpy, matplotlib, scikit-learn, scipy; collections | F6: Pearson correlation (mathematical rendering of corrcoef); Q-Q against normality |
+
+
 
