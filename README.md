@@ -138,9 +138,27 @@ The intervals are 95% percentile estimates from 200 stratified bootstrap replica
 
 ![image](figures_en/roc_macro.png)
 
+
+
+<p align="left">
+  <img src="./assets_tabfpn/roc_macro.png"
+       alt="roc curve"
+       width="800">
+</p>
+
+
 Macro ROC curves for the common test set. Legend AUC values use actual predicted probabilities. The PCA32 + TabPFN-3.5 curve is included.
 
 ![image](figures_en/roc_classes.png)
+
+<p align="left">
+  <img src="./assets_tabfpn/roc_classes.png"
+       alt="roc classes"
+       width="800">
+</p>
+
+
+
 
 TabPFN-3.5 PCA32: actual one-versus-rest curves and AUC for each category.
 
@@ -150,6 +168,15 @@ The horizontal axis is false positive rate and the vertical axis is true positiv
 
 ![image](figures_en/TabPFN-3.5_PCA32_confusion.png)
 
+<p align="left">
+  <img src="./assets_tabfpn/TabPFN-3.5_PCA32_confusion.png"
+       alt="TabPFN-3.5 PCA32 confusion"
+       width="800">
+</p>
+
+
+
+
 Prior Labs TabPFN-3.5 with PCA32: 843 correct and 157 incorrect predictions on 1,000 images.
 
 Each category has 100 test examples, so diagonal counts divided by 100 give class recall. Upper-body garment categories account for important confusions. Row-normalized matrices and all prediction probabilities are supplied for independent class-level checks.
@@ -158,9 +185,28 @@ Each category has 100 test examples, so diagonal counts divided by 100 give clas
 
 ![image](figures_en/MLP_confusion.png)
 
+
+<p align="left">
+  <img src="./assets_tabfpn/MLP_confusion.png"
+       alt="MLP confusion"
+       width="800">
+</p>
+
+
+
+
 MLP: actual test counts. Rows are true labels; columns are predictions.
 
 ![image](figures_en/CNN_base_confusion.png)
+
+
+<p align="left">
+  <img src="./CNN_base_confusion.png"
+       alt="CNN base confusion"
+       width="800">
+</p>
+
+
 
 Baseline CNN: the same 1,000 test observations.
 
@@ -170,9 +216,30 @@ Diagonal cells count correct predictions; off-diagonal cells identify confusions
 
 ![image](figures_en/CNN_profunda_confusion.png)
 
+<p align="left">
+  <img src="./CNN_profunda_confusion.png"
+       alt="CNN profunda confusion"
+       width="800">
+</p>
+
+
+
+
+
 Deep CNN: two convolutions per block before pooling.
 
 ![image](figures_en/CNN_BatchNorm_confusion.png)
+
+<p align="left">
+  <img src="./CNN_BatchNorm_confusion.png"
+       alt="CNN BatchNorm confusion"
+       width="800">
+</p>
+
+
+
+
+
 
 BatchNorm CNN: normalization between convolution and activation.
 
@@ -181,6 +248,15 @@ All five confusion matrices use real predictions on the same test partition. Tab
 ## 8. Learning dynamics and local efficiency
 
 ![image](figures_en/learning.png)
+
+
+<p align="left">
+  <img src="./figures_en/learning.png"
+       alt="figures_en/learning"
+       width="800">
+</p>
+
+
 
 Training loss, validation loss and validation accuracy per epoch. Final evaluation uses the checkpoint with minimum validation loss.
 
@@ -210,6 +286,15 @@ One seed, one subsample and one timing measurement do not support extrapolation 
 
 ![image](figures_en/comparacion_tiempos.png)
 
+
+<p align="left">
+  <img src="./figures_en/comparacion_tiempos.png"
+       alt="figures_en/comparacion tiempos"
+       width="800">
+</p>
+
+
+
 Measured time decomposition. Total time includes fitting and inference; PCA is included for TabPFN.
 
 ### 9.1 Magnitude of the observed advantage
@@ -232,6 +317,16 @@ TabPFN inference took 2.032 s, compared with 0.269 s for Deep CNN, approximately
 ## 10. Dashboard and evaluation controls
 
 ![image](figures_en/dashboard.png)
+
+<p align="left">
+  <img src="./figures_en/dashboard.png"
+       alt="figures_en/dashboard"
+       width="800">
+</p>
+
+
+
+
 
 Static overview of executed results. The accompanying HTML dashboard explores the same metrics.
 
