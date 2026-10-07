@@ -136,7 +136,7 @@ The intervals are 95% percentile estimates from 200 stratified bootstrap replica
 
 ## 4. ROC curves and class discrimination
 
-# ![image](figures_en/roc_macro.png)
+<!--  ![image](figures_en/roc_macro.png) -->
 
 
 
@@ -149,7 +149,7 @@ The intervals are 95% percentile estimates from 200 stratified bootstrap replica
 
 Macro ROC curves for the common test set. Legend AUC values use actual predicted probabilities. The PCA32 + TabPFN-3.5 curve is included.
 
-# ![image](figures_en/roc_classes.png)
+<!--  ![image](figures_en/roc_classes.png) -->
 
 <p align="left">
   <img src="./assets_tabfpn/roc_classes.png"
@@ -166,7 +166,7 @@ The horizontal axis is false positive rate and the vertical axis is true positiv
 
 ## 5. TabPFN-3.5 confusion matrix
 
-![image](figures_en/TabPFN-3.5_PCA32_confusion.png)
+<!-- ![image](figures_en/TabPFN-3.5_PCA32_confusion.png) -->
 
 <p align="left">
   <img src="./assets_tabfpn/TabPFN-3.5_PCA32_confusion.png"
@@ -183,7 +183,7 @@ Each category has 100 test examples, so diagonal counts divided by 100 give clas
 
 ## 6. Confusion matrices: baseline architectures
 
-![image](figures_en/MLP_confusion.png)
+<!--  ![image](figures_en/MLP_confusion.png) -->
 
 
 <p align="left">
@@ -197,7 +197,7 @@ Each category has 100 test examples, so diagonal counts divided by 100 give clas
 
 MLP: actual test counts. Rows are true labels; columns are predictions.
 
-![image](figures_en/CNN_base_confusion.png)
+<!-- ![image](figures_en/CNN_base_confusion.png)-->
 
 
 <p align="left">
@@ -214,7 +214,7 @@ Diagonal cells count correct predictions; off-diagonal cells identify confusions
 
 ## 7. Confusion matrices: convolutional variants
 
-![image](figures_en/CNN_profunda_confusion.png)
+<!-- ![image](figures_en/CNN_profunda_confusion.png) -->
 
 <p align="left">
   <img src="./assets_tabfpn/CNN_profunda_confusion.png"
@@ -228,7 +228,7 @@ Diagonal cells count correct predictions; off-diagonal cells identify confusions
 
 Deep CNN: two convolutions per block before pooling.
 
-# ![image](figures_en/CNN_BatchNorm_confusion.png)
+<!--  # ![image](figures_en/CNN_BatchNorm_confusion.png) -->
 
 <p align="left">
   <img src="./assets_tabfpn/CNN_BatchNorm_confusion.png"
@@ -247,7 +247,7 @@ All five confusion matrices use real predictions on the same test partition. Tab
 
 ## 8. Learning dynamics and local efficiency
 
-# ![image](figures_en/learning.png)
+<!--  # ![image](figures_en/learning.png) -->
 
 
 <p align="left">
@@ -284,9 +284,9 @@ One seed, one subsample and one timing measurement do not support extrapolation 
 
 **Favorable result for Prior Labs TabPFN-3.5.** In the CPU pilot, PCA32 + TabPFN required **54.7% less fitting time** and **39.6% less total time** than Deep CNN, for one fit and one evaluation on the same 1,000 test images.
 
-# ![image](figures_en/comparacion_tiempos.png)
+<!-- # ![image](figures_en/comparacion_tiempos.png) -->
 
-# https://github.com/alamg001/TabFPN_alamg/blob/main/assets_tabfpn/comparacion_tiempos.png
+<!-- # https://github.com/alamg001/TabFPN_alamg/blob/main/assets_tabfpn/comparacion_tiempos.png -->
 
 
 <p align="left">
@@ -318,7 +318,7 @@ TabPFN inference took 2.032 s, compared with 0.269 s for Deep CNN, approximately
 
 ## 10. Dashboard and evaluation controls
 
-# ![image](figures_en/dashboard.png)
+<!--  # ![image](figures_en/dashboard.png) -->
 
 <p align="left">
   <img src="./assets_tabfpn/dashboard.png"
@@ -400,7 +400,7 @@ Each file is included under its exact name in GitHub repository. Dataset refers 
 
 | File | Objective | Description / classification | Dataset | Model | Parameters | Libraries | Mathematical formula |
 |---|---|---|---|---|---|---|---|
-| 01_tabpfgen_class_.md | Configure the generator | Tutorial on the constructor, scaler, and device | Generic X, y table; no specific dataset | TabPFGen | 1000 steps; step size 0.01; noise scale 0.01; device=auto | tabpfgen, torch, scikit-learn | F1: standardization; no constructor-specific equation |
+| 01_tabpfgen_class_.md | Configure_the_generator | Tutorial on the constructor, scaler, and device | Generic X, y table; no specific dataset | TabPFGen | 1000 steps; step size 0.01; noise scale 0.01; device=auto | tabpfgen, torch, scikit-learn | F1: standardization; no constructor-specific equation |
 | 02_tabpfn_integration_.md | Assign targets to synthetic features | Tutorial on integration with a pretrained predictor | Conceptual example: age, blood pressure, and condition; 100 dummy vectors in the code | TabPFNClassifier / TabPFNRegressor | device; fit; predict_proba; predict; illustrative heuristic: fewer than 20 unique values | tabpfn, torch, numpy | F2: classification using argmax; regression using predict |
 | 03_classification_generation___generate_classification___.md | Generate labeled observations | generate_classification tutorial: scaling, initialization, SGLD, and labeling | Dummy emails: 50 × 10; class counts 45/5; requested output 100 × 10 | TabPFGen + TabPFNClassifier | n_samples=100; balance_classes=True; SGLD configuration | numpy, torch, tabpfn, scikit-learn, tabpfgen | F1, F2, F3; initial allocation per class ≈ floor(m/K) |
 | 04_regression_generation___generate_regression___.md | Generate observations with continuous targets | generate_regression tutorial and quantile selection | Dummy housing data: 60 × 2; requested output 120 × 2 | TabPFGen + TabPFNRegressor | n_samples=120; use_quantiles=True; 10 strata in the example; stabilizer 1e-8 | numpy, torch, tabpfn, scikit-learn, tabpfgen | F3, F4; simulation y=50000+100X1+10000X2+10000ξ |
